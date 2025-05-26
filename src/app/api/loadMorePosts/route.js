@@ -1,5 +1,5 @@
 // app/api/loadMorePosts/route.js
-import { client } from '@/sanity/lib/client';
+import { client } from '../../../sanity/lib/client';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
