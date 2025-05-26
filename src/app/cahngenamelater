@@ -1,0 +1,40 @@
+// src/app/studio/[[...index]]/route.ts
+
+//(change name to route.ts later)
+
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const authHeader = request.headers.get('authorization');
+  const validUser = process.env.STUDIO_USER;
+  const validPass = process.env.STUDIO_PASSWORD;
+
+  // Skip middleware if no credentials are set
+  if (!validUser || !validPass) {
+    return NextResponse.next();
+  }
+
+  if (!authHeader) {
+    return new NextResponse('Authentication required', {
+      status: 401,
+      headers: {
+        'WWW-Authenticate': 'Basic realm="Sanity Studio"',
+      },
+    });
+  }
+
+  const [user, pass] = Buffer.from(authHeader.split(' ')[1], 'base64')
+    .toString()
+    .split(':');
+
+  if (user !== validUser || pass !== validPass) {
+    return new NextResponse('Invalid credentials', { status: 401 });
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: '/studio/:path*',
+};

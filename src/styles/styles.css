@@ -64,7 +64,7 @@ img {
 }
 
 .container {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--font-ibm-plex-sans);
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -73,7 +73,7 @@ img {
 }
 
 .container-fluid {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: var(--font-ibm-plex-sans);
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
@@ -103,7 +103,7 @@ img {
 .navbar {
     background-color: var(--primary);
     padding: 60px 0px;
-    font-family: "Playfair Display SC", serif;
+    font-family: var(--font-playfair-display);
     font-weight: 900;
     font-style: normal;
 }
@@ -117,7 +117,7 @@ img {
 }
 
 .header {
-    font-family: "Playfair Display SC", serif;
+    font-family: var(--font-playfair-display);
     font-weight: 900;
     font-style: normal;
 }
@@ -287,7 +287,7 @@ img {
 /*Blog*/
 
 .home-blog {
-    margin-top: 130px;
+    margin-top: 60px;
     padding-bottom: 80px;
 }
 
@@ -469,6 +469,20 @@ img {
     margin-top: 140px;
 }
 
+.blog-page-img {
+    height: 50px;
+    width: 50px;
+}
+
+
+.post-not-found{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (min-height: 800px) {
     .navbar {
         padding: 70px 0px;
@@ -515,7 +529,7 @@ img {
     }
 
     .home-blog {
-        margin-top: 0px;
+        margin-top: 40px;
         padding-bottom: 0px;
     }
 
@@ -562,6 +576,11 @@ img {
 @media (max-width: 576px) {
     .section-primary {
         padding: 120px 0px 50px;
+    }
+
+    .home-blog {
+        margin-top: 20px;
+        padding-bottom: 0px;
     }
 
     .quote-section {

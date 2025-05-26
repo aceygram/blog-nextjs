@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Disallow admin pages
+Disallow: /studio
+Disallow: /admin
+Disallow: /wp-admin/       
+Disallow: /wp-login.php
+Disallow: /cms/
+Disallow: /*?*            
+Allow: /*?*$*             

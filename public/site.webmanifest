@@ -1,0 +1,20 @@
+{
+  "name": "Tone Elizabeth's Blog",
+  "short_name": "Tone's Blog",
+  "description": "Thoughtful articles on politics and geopolitics",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/images/logo.svg",
+      "sizes": "607x307",
+      "type": "image/svg"
+    },
+    {
+      "src": "/images/logo.svg",
+      "sizes": "607x307",
+      "type": "image/svg"
+    }
+  ]
+}

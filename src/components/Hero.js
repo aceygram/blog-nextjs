@@ -1,3 +1,5 @@
+import Image from 'next/image'; // Import the Image component
+
 export default function Hero(){
     return (
         <div className="container-fluid section-primary">
@@ -7,7 +9,7 @@ export default function Hero(){
                         <div className="blogger-name blue-text no-logo">Tone Elizabeth</div>
                         <div className="blogger-name blue-text logo lh-sm">Cutting Through the Noise. One Truth at a Time.</div>
                         <div className="support-text blue-text mt-3 mt-sm-0">
-                            I'm a dedicated political commentator located in Sant Vicenç de Montalt, Catalonia, Spain.
+                            I&apos;m a dedicated political commentator located in Sant Vicenç de Montalt, Catalonia, Spain.
                         </div>
                     </div>
                     <div>
@@ -30,7 +32,13 @@ export default function Hero(){
                 </div>
                 <div className="right col-12 col-lg-6 p-0 ps-lg-5">
                     <div className="img-container">
-                        <img src="images/hero-img.jpg" alt="" />
+                        <Image 
+                            src="/images/hero-img.jpg" 
+                            alt="Tone Elizabeth" 
+                            width={600}  // Set appropriate width
+                            height={800} // Set appropriate height
+                            priority    // Optional: if this is above-the-fold image
+                        />
                     </div>
                 </div>
             </div>

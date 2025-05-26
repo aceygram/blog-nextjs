@@ -1,5 +1,7 @@
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
-export const structure = (S) =>
+// src/sanity/structure.js
+import S from '@sanity/desk-tool/structure-builder';
+
+export const structure = () =>
   S.list()
     .title('Blog')
     .items([

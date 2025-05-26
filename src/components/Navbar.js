@@ -1,22 +1,15 @@
+'use client';
+
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 
 export default function Navbar() {
-    const router = useRouter();
-    const currentRoute = router.pathname;
+    const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
     const navbarCollapseRef = useRef(null);
-    const [bootstrap, setBootstrap] = useState(null);
-
-    // Load Bootstrap safely
-    useEffect(() => {
-        const loadBootstrap = async () => {
-            const bootstrap = await import('bootstrap/dist/js/bootstrap.bundle.min');
-            setBootstrap(bootstrap);
-        };
-        loadBootstrap();
-    }, []);
+    const [collapseInstance, setCollapseInstance] = useState(null);
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -25,16 +18,32 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        // Load Bootstrap only on client side
+        const initBootstrap = async () => {
+            const bootstrap = await import('bootstrap/dist/js/bootstrap.bundle.min');
+            if (navbarCollapseRef.current) {
+                const instance = new bootstrap.Collapse(navbarCollapseRef.current, {
+                    toggle: false
+                });
+                setCollapseInstance(instance);
+            }
+        };
+
+        initBootstrap();
+
+        return () => {
+            // Clean up collapse instance
+            if (collapseInstance) {
+                collapseInstance.dispose();
+            }
+        };
+    }, []);
+
     const closeMobileMenu = () => {
-        if (!bootstrap || !navbarCollapseRef.current) return;
-        
-        try {
-            // Get existing collapse instance or create new one
-            const collapseInstance = bootstrap.Collapse.getInstance(navbarCollapseRef.current) || 
-                                   new bootstrap.Collapse(navbarCollapseRef.current, { toggle: false });
+        if (collapseInstance) {
             collapseInstance.hide();
-        } catch (error) {
-            console.error('Error closing menu:', error);
+        } else if (navbarCollapseRef.current) {
             // Fallback to class manipulation
             navbarCollapseRef.current.classList.remove('show');
         }
@@ -44,13 +53,25 @@ export default function Navbar() {
         <nav className={`navbar fixed-top navbar-expand-lg navbar-light ${isScrolled ? 'navbar-shrink' : ''}`}>
             <div className="container-fluid">
                 <div className="logo">
-                    <img src="/images/logo.svg" alt="Website Logo" />
+                    <Image 
+                        src="/images/logo.svg" 
+                        alt="Website Logo" 
+                        width={120}
+                        height={40}
+                        priority
+                    />
                 </div>
                 <button 
                     className="navbar-toggler primary" 
                     type="button" 
-                    data-bs-toggle="collapse" 
-                    data-bs-target="#navbarNavAltMarkup"
+                    onClick={() => {
+                        if (collapseInstance) {
+                            collapseInstance.toggle();
+                        } else if (navbarCollapseRef.current) {
+                            // Fallback
+                            navbarCollapseRef.current.classList.toggle('show');
+                        }
+                    }}
                     aria-expanded="false" 
                     aria-label="Toggle navigation"
                 >
@@ -62,13 +83,13 @@ export default function Navbar() {
                     ref={navbarCollapseRef}
                 >
                     <div className="navbar-nav row container nav-pills nav-justified">
-                        <Link href="/" className={`nav-link col ${currentRoute === '/' ? 'active' : ''}`} onClick={closeMobileMenu}>
+                        <Link href="/" className={`nav-link col ${pathname === '/' ? 'active' : ''}`} onClick={closeMobileMenu}>
                             HOME
                         </Link>
-                        <Link href="/blog" className={`nav-link col ${currentRoute === '/blog' ? 'active' : ''}`} onClick={closeMobileMenu}>
+                        <Link href="/blog" className={`nav-link col ${pathname === '/blog' ? 'active' : ''}`} onClick={closeMobileMenu}>
                             BLOG
                         </Link>
-                        <Link href="/bio" className={`nav-link col ${currentRoute === '/bio' ? 'active' : ''}`} onClick={closeMobileMenu}>
+                        <Link href="/bio" className={`nav-link col ${pathname === '/bio' ? 'active' : ''}`} onClick={closeMobileMenu}>
                             ABOUT
                         </Link>
                         <Link href="/#contact" className="nav-link col" onClick={closeMobileMenu}>

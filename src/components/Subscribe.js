@@ -1,8 +1,17 @@
-import { useState } from 'react';
+'use client';
 
-export default function Subscribe({ className = "" }) {
+import { useState, useEffect } from 'react';
+
+export default function Subscribe({ sectionClassName = " ", 
+  inputClassName = " " }) {
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false); // ← Add this line
+
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []); // <- ADD THIS
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,8 +46,10 @@ export default function Subscribe({ className = "" }) {
     }
   };
 
+    if (!hasMounted) return null; // <- AVOID HYDRATION ERROR
+
   return (
-    <div className={`container-fluid blue-text py-5 px-4 px-lg-5 border-0 ${className}`}>
+    <div className={`container-fluid blue-text py-5 px-4 px-lg-5 border-0 ${sectionClassName}`}>
       <h2 className='header px-30'>Subscribe to My Newsletter</h2>
       <p className='px-20'>Get updates, new posts, and more directly in your inbox.</p>
       <form onSubmit={handleSubmit} className='px-18'>
@@ -47,7 +58,7 @@ export default function Subscribe({ className = "" }) {
           <input 
             type="text" 
             name="name" 
-            className="form-control alternate-text shadow-none" 
+            className={`form-control alternate-text shadow-none ${inputClassName}`}
             required 
             disabled={isSubmitting}
           />
@@ -57,7 +68,7 @@ export default function Subscribe({ className = "" }) {
           <input 
             type="email" 
             name="email" 
-            className="form-control alternate-text shadow-none" 
+            className={`form-control alternate-text shadow-none ${inputClassName}`}
             required 
             disabled={isSubmitting}
           />
@@ -72,7 +83,12 @@ export default function Subscribe({ className = "" }) {
       </form>
 
       {status && (
-        <div className={`mt-4 alert secondary primary-text ${status.includes('Thanks') ? 'alert-success' : 'alert-danger'}`}>
+        <div
+          suppressHydrationWarning
+          className={`mt-4 alert secondary primary-text ${
+            status.includes('Thanks') ? 'alert-success' : 'alert-danger'
+          }`}
+        >
           {status}
         </div>
       )}

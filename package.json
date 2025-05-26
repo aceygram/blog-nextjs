@@ -9,22 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sanity/icons": "^3.7.0",
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.88.3",
+    "@portabletext/react": "^3.2.1",
+    "@sanity/client": "^5.3.1",
+    "@sanity/desk-tool": "^2.36.2",
+    "@sanity/types": "^3.89.0",
+    "@sanity/ui": "2.15.18",
+    "@sanity/vision": "^3.89.0",
     "bootstrap": "^5.3.6",
-    "next": "15.3.2",
+    "next": "^15.1.8",
     "next-sanity": "^9.11.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sanity": "^3.88.3",
-    "styled-components": "^6.1.18"
+    "react": "^19.1.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.1.0",
+    "sanity": "^3.89.0",
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/bootstrap": "^5.2.10",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.2",
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-styled-components": "^2.1.4",
+    "eslint": "^9.27.0",
+    "eslint-config-next": "13.4.19",
     "typescript": "5.8.3"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:aceygram/blog-nextjs.git",
+  "author": "aceygram <ace4facebook@gmail.com>",
+  "license": "MIT"
 }

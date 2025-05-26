@@ -1,8 +1,15 @@
-import { useState } from 'react';
+"use client"
+import { useState, useEffect } from 'react';
+import Image from 'next/image'; // Import the Image component
 
 export default function ContactForm() {
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,14 +44,22 @@ export default function ContactForm() {
     }
   };
 
+  if (!hasMounted) return null;
+
   return (
     <div className="container-fluid py-5 px-4 px-lg-5 secondary d-flex flex-column px-18" id='contact'>
       <div className="img-container align-self-center mb-4 no-logo">
-        <img src="images/contact-1.svg" alt="Contact icon" />
+        <Image 
+          src="/images/contact-1.svg" 
+          alt="Contact icon" 
+          width={100} // Set appropriate width
+          height={100} // Set appropriate height
+          // You can add more optimization props if needed
+        />
       </div>
       <div className='header logo px-30'>Contact Me</div>
 
-      
+      {/* Rest of your form remains the same */}
       <form onSubmit={handleSubmit}>
         <div className="mt-4 mt-lg-0 mb-4">
           <label className="form-label">Your Name</label>

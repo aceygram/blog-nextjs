@@ -1,7 +1,7 @@
-import Blog from "@/components/RecentBlog";
-import ContactForm from "@/components/ContactForm";
-import Hero from "@/components/Hero";
-import Quote from "@/components/Quote";
+import Blog from "../../components/RecentBlog";
+import ContactForm from "../../components/ContactForm";
+import Hero from "../../components/Hero";
+import Quote from "../../components/Quote";
 
 
 export default function Home() {
