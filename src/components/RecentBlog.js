@@ -1,7 +1,8 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import { getAllPosts } from '../sanity/lib/posts';
 
 export default function RecentBlog({ 
   sectionClassName = "container-fluid home-blog", 
@@ -14,8 +15,9 @@ export default function RecentBlog({
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const data = await getAllPosts();
-        console.log('Fetched posts in RecentBlog:', data); // Debugging
+        const res = await fetch('/api/recentPosts');
+        const data = await res.json();
+        console.log('Fetched posts in RecentBlog:', data);
         setPosts(data || []);
       } catch (error) {
         console.error('Error fetching posts:', error);
