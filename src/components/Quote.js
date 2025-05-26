@@ -1,7 +1,7 @@
 export default function Quote() {
     return (
-        <div className="container-fluid quote-section row m-0 section-primary">
-            <div id="carouselExampleControls" className="carousel slide carousel-fade col-lg-6 col-md-12" data-bs-ride="carousel">
+        <div className="container-fluid quote-section row m-0 section-primary justify-content-center justify-content-lg-start gap-5 gap-lg-0">
+            <div id="carouselExampleControls" className="carousel slide carousel-fade col-lg-6 col-md-12" data-bs-ride="carousel" data-bs-interval="3000">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img src="images/speak-up-5.jpg" className="d-block w-100" alt="..." />
@@ -31,11 +31,11 @@ export default function Quote() {
                     </button>
                 </div>
             </div>
-            <div className="quote col-lg-6 col-md-12 align-self-center d-flex flex-column justify-content-center ps-5">
-                <div className="img-container align-self-center">
+            <div className="quote col-lg-6 col-md-12 align-self-center d-flex flex-column justify-content-center justify-content-lg-start p-2 ps-lg-5">
+                <div className="img-container align-self-center ps-lg-5">
                     <img src="images/quote-secondary.svg" alt="" />
                 </div>
-                <div className="support-text">
+                <div className="support-text align-self-center align-self-lg-start text-center">
                     "The most common way people give up their power is by thinking they don't have any." <span>— Alice Walker</span>
                 </div>
             </div>

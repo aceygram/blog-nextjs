@@ -2,45 +2,102 @@ import { useState } from 'react';
 
 export default function ContactForm() {
   const [status, setStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
+    setIsSubmitting(true);
+    setStatus('');
 
-    const data = new FormData(form);
+    try {
+      const data = new FormData(form);
+      
+      const response = await fetch('https://formspree.io/f/xanobjjv', {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
 
-    const response = await fetch('https://formspree.io/f/xanobjjv', {
-      method: 'POST',
-      body: data,
-    });
-
-    if (response.ok) {
-      setStatus('Thank you for your message!');
-    } else {
-      setStatus('Oops, something went wrong. Please try again.');
+      const result = await response.json();
+      
+      if (result.ok) {
+        setStatus('Thank you for your message! We will get back to you soon.');
+        form.reset();
+      } else {
+        throw new Error(result.error || 'Submission failed');
+      }
+    } catch (error) {
+      console.error('Contact form submission error:', error);
+      setStatus('Oops! Something went wrong. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="container-fluid py-5 px-5 secondary" id='contact'>
-      <h1>Contact Me</h1>
+    <div className="container-fluid py-5 px-4 px-lg-5 secondary d-flex flex-column px-18" id='contact'>
+      <div className="img-container align-self-center mb-4 no-logo">
+        <img src="images/contact-1.svg" alt="Contact icon" />
+      </div>
+      <div className='header logo px-30'>Contact Me</div>
+
+      
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <div className="mt-4 mt-lg-0 mb-4">
           <label className="form-label">Your Name</label>
-          <input type="text" name="name" className="form-control" required />
+          <input 
+            type="text" 
+            name="name" 
+            className="form-control shadow-none primary-text" 
+            required 
+            disabled={isSubmitting}
+          />
         </div>
-        <div className="mb-3">
+        
+        <div className="mb-4">
           <label className="form-label">Your Email</label>
-          <input type="email" name="email" className="form-control" required />
+          <input 
+            type="email" 
+            name="email" 
+            className="form-control shadow-none primary-text" 
+            required 
+            disabled={isSubmitting}
+          />
         </div>
-        <div className="mb-3">
+        
+        <div className="mb-4">
           <label className="form-label">Your Message</label>
-          <textarea name="message" className="form-control" rows="4" required></textarea>
+          <textarea 
+            name="message" 
+            className="form-control shadow-none primary-text" 
+            rows="4" 
+            required
+            disabled={isSubmitting}
+          ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        
+        <button 
+          type="submit" 
+          className="btn btn-outline-success contact"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Sending...
+            </>
+          ) : 'Submit'}
+        </button>
       </form>
 
-      {status && <p>{status}</p>}
+      {status && (
+        <div className={`mt-5 alert border-0 alternate primary-text ${status.includes('Thank you') ? 'alert-success' : 'alert-danger'}`}>
+          {status}
+        </div>
+      )}
     </div>
   );
 }

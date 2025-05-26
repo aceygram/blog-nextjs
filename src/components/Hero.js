@@ -1,17 +1,18 @@
 export default function Hero(){
     return (
         <div className="container-fluid section-primary">
-            <div className="hero row flex-nowrap">
-                <div className="left col p-0 d-flex flex-column justify-content-between">
+            <div className="hero row flex-lg-nowrap">
+                <div className="left col-12 pb-4 pb-lg-0 col-lg-6 d-flex gap-5 flex-column justify-content-between">
                     <div>
-                        <div className="blogger-name blue-text">Tone Elizabeth</div>
-                        <div className="support-text blue-text">
+                        <div className="blogger-name blue-text no-logo">Tone Elizabeth</div>
+                        <div className="blogger-name blue-text logo lh-sm">Cutting Through the Noise. One Truth at a Time.</div>
+                        <div className="support-text blue-text mt-3 mt-sm-0">
                             I'm a dedicated political commentator located in Sant Vicenç de Montalt, Catalonia, Spain.
                         </div>
                     </div>
                     <div>
-                        <div className="sm-handle alternate-text">@lilth141</div>
-                        <div className="sm-icon alternate-fill">
+                        <div className="sm-handle alternate-text text-end text-lg-start">@lilth141</div>
+                        <div className="sm-icon alternate-fill justify-content-end justify-content-lg-start">
                             <a href="">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>linkedin</title><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" /></svg>
                             </a>
@@ -27,7 +28,7 @@ export default function Hero(){
                         </div>
                     </div>
                 </div>
-                <div className="right col p-0 ps-5">
+                <div className="right col-12 col-lg-6 p-0 ps-lg-5">
                     <div className="img-container">
                         <img src="images/hero-img.jpg" alt="" />
                     </div>
