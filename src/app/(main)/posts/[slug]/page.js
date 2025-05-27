@@ -248,7 +248,7 @@ export default async function BlogPost({ params }) {
                   <div className="card-body">
                     <h5 className="card-title header">{relatedPost.title}</h5>
                     <Link 
-                      href={`/posts/${relatedPost.slug.current}`} 
+                      href={`/posts/${relatedPost.slug}`} 
                       className="alternate-text text-decoration-none fw-bold"
                     >
                       Read Post →
