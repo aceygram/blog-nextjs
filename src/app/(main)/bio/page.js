@@ -26,7 +26,7 @@ export default function Bio() {
                             <p>Let&apos;s keep asking the hard questions and demanding better from those in power. The fight for truth is never over — and I&apos;m not done talking. 🎤</p>
                         </div>
                         <div className="d-flex d-md-content justify-content-center">
-                            <Link href='#' className="justify-self-center btn btn-outline-success subscribe">
+                            <Link href='https://aceygram.github.io/tone-baekholt/' className="justify-self-center btn btn-outline-success subscribe" target="_blank">
                               Visit My Portfolio Website
                             </Link>
                         </div>
