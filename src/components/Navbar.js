@@ -40,6 +40,18 @@ export default function Navbar() {
         };
     }, []);
 
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (hash) {
+            setTimeout(() => {
+                const el = document.querySelector(hash);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300); // delay to ensure DOM is rendered
+        }
+    }, [pathname]); // re-run when path changes
+
     const closeMobileMenu = () => {
         if (collapseInstance) {
             collapseInstance.hide();
